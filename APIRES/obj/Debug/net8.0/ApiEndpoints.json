@@ -96,6 +96,22 @@
   },
   {
     "ContainingType": "APIRES.Controllers.RelacionesController",
+    "Method": "Eliminar",
+    "RelativePath": "api/Relaciones/Eliminar/{IdRelacione}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "IdRelacione",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "APIRES.Controllers.RelacionesController",
     "Method": "GuardarRelaciones",
     "RelativePath": "api/Relaciones/GuardarRelaciones",
     "HttpMethod": "POST",

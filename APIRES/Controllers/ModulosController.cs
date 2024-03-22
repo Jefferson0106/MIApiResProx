@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Runtime.InteropServices.Marshalling;
-
+using Microsoft.AspNetCore.Cors;
 using Microsoft.EntityFrameworkCore;
 using APIRES.Models;
 
@@ -10,6 +10,8 @@ namespace APIRES.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("myCorsConfig")] // Aquí especifica el nombre de tu directiva CORS
+
     public class ModulosController : ControllerBase
     {
         public readonly MIAPIContext _dbcontext;

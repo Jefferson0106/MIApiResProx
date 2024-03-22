@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Runtime.InteropServices.Marshalling;
-
+using Microsoft.AspNetCore.Cors;
 using Microsoft.EntityFrameworkCore;
 using APIRES.Models;
 
@@ -10,6 +10,7 @@ namespace APIRES.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("myCorsConfig")] // Aquí especifica el nombre de tu directiva CORS
     public class RolesController : ControllerBase
     {
         public readonly MIAPIContext _dbcontext;
@@ -28,7 +29,7 @@ namespace APIRES.Controllers
                 var Rol = _dbcontext.Rols.Select(r => new
                 {
                     r.IdRol,
-                    r.Nombre
+                    r.Nombre,
                 }).ToList();
 
                 return StatusCode(StatusCodes.Status200OK, new { mensaje = "Petición realizada exitosamente", response = Rol });
@@ -80,7 +81,7 @@ namespace APIRES.Controllers
                 _dbcontext.Rols.Add(nuevoRol);
                 _dbcontext.SaveChanges();
 
-                return StatusCode(StatusCodes.Status200OK, new { mensaje = "Su Rol Se Guardo Correctamente" });
+                return StatusCode(StatusCodes.Status200OK, new { savedRole = nuevoRol, mensaje = "Su Rol Se Guardo" });
             }
             catch (Exception ex)
             {
@@ -137,6 +138,7 @@ namespace APIRES.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.InnerException?.Message);
                 return StatusCode(StatusCodes.Status200OK, new { mensaje = ex.Message });
             }
         }

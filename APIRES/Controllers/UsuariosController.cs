@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Runtime.InteropServices.Marshalling;
-
+using Microsoft.AspNetCore.Cors;
 using Microsoft.EntityFrameworkCore;
 using APIRES.Models;
 
@@ -10,6 +10,7 @@ namespace APIRES.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("myCorsConfig")] // Aquí especifica el nombre de tu directiva CORS
     public class UsuariosController : ControllerBase
     {
         public readonly MIAPIContext _dbcontext;
@@ -31,6 +32,7 @@ namespace APIRES.Controllers
                     r.Nombre,
                     r.Apellido,
                     r.Correo,
+                    r.Contrasena,
                     r.Cargo,
                     r.Telefono,
                     r.IdRol,
@@ -65,12 +67,13 @@ namespace APIRES.Controllers
                     r.Nombre,
                     r.Apellido,
                     r.Correo,
+                    r.Contrasena,
                     r.Cargo,
                     r.Telefono,
                     r.IdRol,
                 }).ToList();
 
-                return StatusCode(StatusCodes.Status200OK, new { mensaje = "Petición realizada exitosamente", response = Usuarios });
+                return StatusCode(StatusCodes.Status200OK,  new  { mensaje = "Petición realizada exitosamente", response = Usuarios });
             }
             catch (Exception ex)
             {

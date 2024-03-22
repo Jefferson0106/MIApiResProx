@@ -1,15 +1,17 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Runtime.InteropServices.Marshalling;
-
 using Microsoft.EntityFrameworkCore;
 using APIRES.Models;
+using Microsoft.AspNetCore.Cors;
 
 
 namespace APIRES.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("myCorsConfig")] // Aquí especifica el nombre de tu directiva CORS
+
     public class RelacionesController : ControllerBase
     {
 
@@ -32,7 +34,7 @@ namespace APIRES.Controllers
             {
                 lista = _dbcontext.Relaciones
                     .Include(c => c.IdRols)
-                    .Include(c=> c.IdModulos)
+                    .Include(c => c.IdModulos)
                     .ToList();
                 return StatusCode(StatusCodes.Status200OK, new { mensaje = "ok", response = lista });
             }
@@ -102,7 +104,7 @@ namespace APIRES.Controllers
 
         [HttpPut]
         [Route("EditarRelaciones")]
-        public IActionResult EditarRelaciones(int IdRol,int IdModulo)
+        public IActionResult EditarRelaciones(int IdRol, int IdModulo)
         {
             try
             {
@@ -116,7 +118,7 @@ namespace APIRES.Controllers
 
                 RelacionesExistente.IdRol = IdRol;
                 RelacionesExistente.IdModulo = IdModulo;
-                
+
 
 
                 _dbcontext.SaveChanges();
@@ -130,8 +132,28 @@ namespace APIRES.Controllers
         }
 
 
+        [HttpDelete("Eliminar/{IdRelacione:int}")]
+        public IActionResult Eliminar(int IdRelacione)
+        {
+            Relacione Relaciones = _dbcontext.Relaciones.Find(IdRelacione);
 
+            if (Relaciones == null)
+            {
+                return NotFound("Rol no encontrado");
+            }
+
+            try
+            {
+                _dbcontext.Relaciones.Remove(Relaciones);
+                _dbcontext.SaveChanges();
+
+                return Ok(new { mensaje = "Su Rol Se Eliminó Exitosamente" });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.InnerException?.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new { mensaje = "Error al eliminar el rol" });
+            }
+        }
     }
-
-    }
-
+}
