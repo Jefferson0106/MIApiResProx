@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("APIRES")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+38b7a96239696cb897d97aa0af762884ac3c1b9b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+90b3800328e9aac6b7e1834669faf3b76a9e6c9f")]
 [assembly: System.Reflection.AssemblyProductAttribute("APIRES")]
 [assembly: System.Reflection.AssemblyTitleAttribute("APIRES")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

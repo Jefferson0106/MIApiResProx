@@ -38,7 +38,7 @@ namespace APIRES.Controllers
                     r.IdRol,
                 }).ToList();
 
-                return StatusCode(StatusCodes.Status200OK, new { mensaje = "Petición realizada exitosamente", response = Usuario });
+                return StatusCode(StatusCodes.Status200OK, new { mensaje = "Petición realizada exitosamente Kevin diaz bloqueo a tu contacto ayer 20:00pm rosi amiga de reveca  en bahenhf servidor jeffer.belico ", response = Usuario });
             }
             catch (Exception ex)
             {
